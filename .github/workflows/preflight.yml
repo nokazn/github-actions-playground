@@ -1,0 +1,21 @@
+name: preflight
+
+on:
+  push:
+    branches: [develop, master, main]
+  pull_request:
+    branches: [develop, master, main]
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: preflight
+        run: |
+          echo "preflight"

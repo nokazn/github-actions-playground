@@ -1,0 +1,23 @@
+name: deployment
+
+on:
+  workflow_run:
+    workflows: [test]
+    branches: [main]
+    types:
+      - completed
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-workflow-run-wait@v1
+
+      - name: deployment
+        run: |
+          echo "deployment"
