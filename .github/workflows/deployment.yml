@@ -2,8 +2,8 @@ name: deployment
 
 on:
   workflow_run:
-    workflows: [test]
-    branches: [main]
+    workflows: [preflight]
+    branches: [master, main]
     types:
       - completed
 
@@ -16,8 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: ahmadnassri/action-workflow-run-wait@v1
 
       - name: deployment
         run: |
-          echo "deployment"
+          echo "${{ github.event.workflow_run }}"
