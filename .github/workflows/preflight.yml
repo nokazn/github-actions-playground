@@ -7,7 +7,7 @@ on:
     branches: [develop, master, main]
 
 jobs:
-  dependencies:
+  job1:
     runs-on: ubuntu-latest
     strategy:
       matrix:
