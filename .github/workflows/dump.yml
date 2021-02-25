@@ -42,3 +42,9 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
+
+      - name: "git log"
+        run: |
+          git log -n 3
+          git log -1 --pretty="format:" --name-only --rename-empty
+          git log -1 --pretty="format:" --name-only --rename-empty | grep -E "\.vue$" && echo "Change of .vue files are detected!"
