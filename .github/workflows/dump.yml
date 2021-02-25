@@ -45,6 +45,5 @@ jobs:
 
       - name: "git log"
         run: |
-          git log -n 3
           git log -1 --pretty="format:" --name-only --rename-empty
-          git log -1 --pretty="format:" --name-only --rename-empty | grep -E "\.vue$" && echo "Change of .vue files are detected!"
+          git log -1 --pretty="format:" --name-only --rename-empty | grep -E "\.vue$" && echo "Change of .vue files are detected."
