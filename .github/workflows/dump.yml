@@ -47,7 +47,7 @@ jobs:
         id: git-diff
         with:
           PATTERNS: |
-            /**/*.sh
+            **/*.sh
           FILES: |
             hello.sh
             yarn.lock
