@@ -43,7 +43,22 @@ jobs:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
 
-      - name: "git log"
+      - uses: technote-space/get-diff-action@v4
+        id: git-diff
+        with:
+          PATTERNS: |
+            +/**/*.ts
+          FILES: |
+            yarn.lock
+            .eslintrc
+
+      - name: show-diff
+        env:
+          GIT_DIFF: ${{ toJSON(steps.git-diff) }}
         run: |
-          git log --pretty="format:" --name-only --rename-empty
-          git log --pretty="format:" --name-only --rename-empty | grep -E "\.vue$" && echo "Change of .vue files are detected."
+          echo "${GIT_DIFF}"
+
+      - name: diff
+        if: steps.git-diff.outputs
+        run: |
+          echo "Some shell scripts are modified."
