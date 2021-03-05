@@ -47,8 +47,9 @@ jobs:
         id: git-diff
         with:
           PATTERNS: |
-            +/**/*.ts
+            /**/*.sh
           FILES: |
+            hello.sh
             yarn.lock
             .eslintrc
 
