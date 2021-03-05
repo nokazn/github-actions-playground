@@ -1,1 +1,3 @@
-Hello
+#!/bin/bash
+
+echo "Hello!"

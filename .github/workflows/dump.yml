@@ -59,6 +59,6 @@ jobs:
           echo "${GIT_DIFF}"
 
       - name: diff
-        if: steps.git-diff.outputs
+        if: steps.git-diff.outputs.diff
         run: |
           echo "Some shell scripts are modified."
