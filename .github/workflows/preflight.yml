@@ -4,7 +4,6 @@ on:
   push:
     branches: [develop, master, main]
   pull_request:
-    branches: [develop, master, main]
 
 jobs:
   job1:
@@ -19,3 +18,25 @@ jobs:
       - name: preflight
         run: |
           echo "preflight"
+
+      - uses: technote-space/get-diff-action@v4
+        id: git-diff
+        with:
+          PATTERNS: |
+            **/*.sh
+          FILES: |
+            hello.sh
+            yarn.lock
+            .eslintrc
+
+      - name: show-diff
+        env:
+          GIT_DIFF: ${{ toJSON(steps.git-diff) }}
+        run: |
+          echo "${GIT_DIFF}"
+          git rev-parse HEAD~
+
+      - name: diff
+        if: steps.git-diff.outputs.diff
+        run: |
+          echo "Some shell scripts are modified."
